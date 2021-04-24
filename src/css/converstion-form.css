@@ -1,0 +1,11 @@
+.conversion-form__item {
+    margin-bottom: 30px;
+}
+
+.conversion-form__item-title {
+    margin-bottom: 10px;
+}
+
+.conversion-form__item-input:nth-child(2n) {
+    margin-right: 10px;
+}
