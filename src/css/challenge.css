@@ -21,6 +21,7 @@
 .challenge-step__input.MuiFormControl-root {
     margin-bottom: 10px;
 }
+
 .challenge-step__input:nth-child(2n + 1) {
     margin-right: 10px;
 }
@@ -32,10 +33,10 @@
     margin-top: 10px;
 }
 
-.red-border .MuiOutlinedInput-root {
-    border-color: red !important;
-}
-
-.green-border .MuiOutlinedInput-root {
-    border-color: green !important;
+.challenge-container__no-data-message {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 50px;
+    font-weight: bold;
 }

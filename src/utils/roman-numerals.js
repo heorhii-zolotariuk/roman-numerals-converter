@@ -1,15 +1,15 @@
 const lookup = new Map([
-    ['M', 1000],
-    ['D', 500],
-    ['C', 100],
-    ['L', 50],
-    ['X', 10],
-    ['V', 5],
-    ['I', 1],
+    ["M", 1000],
+    ["D", 500],
+    ["C", 100],
+    ["L", 50],
+    ["X", 10],
+    ["V", 5],
+    ["I", 1],
 ]);
 
 const toRoman = (integer) => {
-    let romanNumerical = '';
+    let romanNumerical = "";
 
     if (!integer) {
         return romanNumerical;
@@ -25,25 +25,25 @@ const toRoman = (integer) => {
     return romanNumerical;
 }
 
-const toInteger = (romanNumeral) => {
-    let integer = 0;
+const toArabic = (romanNumeral) => {
+    let arabicNumber = 0;
 
     if (!romanNumeral) {
-        return '';
+        return "";
     }
 
     if(romanNumeral){
         const charsArray = romanNumeral.toUpperCase().split('');
 
         charsArray.forEach((char, index) =>{
-            integer += lookup.get(char) < lookup.get(charsArray[index+1]) ? -lookup.get(char) : lookup.get(char);
+            arabicNumber += lookup.get(char) < lookup.get(charsArray[index+1]) ? -lookup.get(char) : lookup.get(char);
         });
     }
 
-    return integer;
+    return arabicNumber;
 }
 
 export {
     toRoman,
-    toInteger
+    toArabic
 }

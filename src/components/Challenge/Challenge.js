@@ -1,46 +1,29 @@
 import { useState } from 'react';
+
 import { getArrayOfRandomNumbers } from '../../utils/random-numbers';
-import { toInteger } from '../../utils/roman-numerals';
+import { toArabic } from '../../utils/roman-numerals';
+
 import ChallengeStep from './ChallengeStep';
 import ChallengeSettings from './ChallengeSettings';
 import ChallengeFooter from './ChallengeFooter';
 
 function Challenge() {
+    const getDefaultStepsValue = (stepsCount) => {
+        return getArrayOfRandomNumbers(1, 3999, stepsCount).map((number) => ({
+            task: number,
+            answer: "",
+            correct: false
+        }))
+    }
+
     const [submitted, setSubmitted] = useState(false);
     const [stepsCount, setStepsCount] = useState(5);
-    const [stepsValue, setStepsValue] = useState(getArrayOfRandomNumbers(1, 3999, stepsCount).map((number) => ({
-        task: number,
-        answer: '',
-        correct: false
-    })));
+    const [stepsValue, setStepsValue] = useState(getDefaultStepsValue(stepsCount));
 
-    const setDefaultStepsValue = (stepsCount) => {
-        const updatedStepsValue = getArrayOfRandomNumbers(1, 3999, stepsCount).map((number) => ({
-            task: number,
-            answer: '',
-            correct: false
-        }));
-
-        setStepsValue(updatedStepsValue);
-    }
-
-    const setStepAnswer = (index, value) => {
-        const updatedStepsValue = stepsValue.map((stepValue, stepIndex) => stepIndex !== index ? stepValue : { ...stepValue, answer: value });
-
-        setStepsValue(updatedStepsValue);
-    };
-
-    const updateSteps = (updatedStepsCount) => {
-        setStepsCount(updatedStepsCount);
-        resetTasks(updatedStepsCount);
-    }
-
-    const submitAnswers = () => {
-        setSubmitted(true);
-
-        const updatedStepsValue = stepsValue.map(stepValue => {
-            if (stepValue.task === toInteger(stepValue.answer)) {
-                return { ...stepValue, correct: true }
+    const setStepAnswer = (index) => (value) => {
+        const updatedStepsValue = stepsValue.map((stepValue, stepIndex) => {
+            if (stepIndex === index) {
+                return { ...stepValue, answer: value };
             }
 
             return stepValue;
@@ -49,19 +32,38 @@ function Challenge() {
         setStepsValue(updatedStepsValue);
     }
 
-    const calculateResult = () => {
+    const updateStepsCount = (updatedStepsCount) => {
+        setStepsCount(updatedStepsCount);
+        resetTasks(updatedStepsCount);
+    }
+
+    const submitAnswers = () => {
+        setSubmitted(true);
+
+        const updatedStepsValue = stepsValue.map(stepValue => {
+            if (stepValue.task === toArabic(stepValue.answer)) {
+                return { ...stepValue, correct: true };
+            }
+
+            return stepValue;
+        });
+
+        setStepsValue(updatedStepsValue);
+    }
+
+    const getResultMessage = () => {
         if (!submitted) {
-            return null
+            return null;
         }
 
         const correctAnswersCount = stepsValue.filter((stepValue) => stepValue.correct).length;
 
-        return `${correctAnswersCount} out of ${stepsCount}`
+        return `${correctAnswersCount} out of ${stepsCount}`;
     }
 
     const resetTasks = (stepsCount) => {
         setSubmitted(false);
-        setDefaultStepsValue(stepsCount);
+        setStepsValue(getDefaultStepsValue(stepsCount));
     }
 
     return (
@@ -70,7 +72,7 @@ function Challenge() {
             <ChallengeSettings
                 submitted={submitted}
                 stepsCount={stepsCount}
-                setStepsCount={updateSteps}
+                setStepsCount={updateStepsCount}
                 resetTasks={() => resetTasks(stepsCount)}
             />
             {
@@ -79,12 +81,11 @@ function Challenge() {
                         key={stepValue.task}
                         submitted={submitted}
                         stepValue={stepsValue[index]}
-                        stepIndex={index}
-                        setStepAnswer={setStepAnswer}
+                        setStepAnswer={setStepAnswer(index)}
                     />)
-                    : 'Please enter steps count'
+                    : <div className="challenge-container__no-data-message">Please enter steps count</div>
             }
-            <ChallengeFooter submitted={submitted} submitAnswers={submitAnswers} result={calculateResult()}/>
+            <ChallengeFooter submitted={submitted} submitAnswers={submitAnswers} result={getResultMessage()}/>
         </div>
     );
 }

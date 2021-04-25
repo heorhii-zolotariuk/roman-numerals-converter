@@ -14,8 +14,8 @@ function ChallengeStep({ stepsCount, setStepsCount, resetTasks, submitted }) {
                 onChange={(e) => setStepsCount(e.target.value)}
             />
             <Button
-                className="challenge-step__button"
-                variant="outlined"
+                className="challenge-settings__button"
+                variant={submitted ? "contained" : "outlined"}
                 color="primary"
                 onClick={resetTasks}
             >Reset</Button>

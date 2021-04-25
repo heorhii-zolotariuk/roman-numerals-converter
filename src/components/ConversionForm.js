@@ -1,10 +1,11 @@
 import { useState } from 'react'
 import TextField from '@material-ui/core/TextField';
-import { toRoman, toInteger } from '../utils/roman-numerals'
+
+import { toRoman, toArabic } from '../utils/roman-numerals'
 
 function ConversionForm() {
-    const [romanNumeral, setRomanNumerals] = useState('');
-    const [integer, setInteger] = useState('');
+    const [romanNumeral, setRomanNumerals] = useState("");
+    const [arabicNumber, setArabicNumber] = useState("");
 
     return (
         <div className="conversion-form">
@@ -15,18 +16,18 @@ function ConversionForm() {
                     className="conversion-form__item-input"
                     variant="outlined"
                     type="text"
-                    placeholder='Enter Arabic Number'
-                    value={integer}
-                    onChange={(e) => setInteger(e.target.value)}
+                    placeholder="Enter Arabic Number"
+                    value={arabicNumber}
+                    onChange={(e) => setArabicNumber(e.target.value)}
                 />
                 <TextField
                     className="conversion-form__item-input"
                     label="Roman Numeral"
                     variant="outlined"
                     type="text"
-                    placeholder='Roman Numeral'
+                    placeholder="Roman Numeral"
                     disabled={true}
-                    value={toRoman(integer)}
+                    value={toRoman(arabicNumber)}
                 />
             </div>
 
@@ -37,7 +38,7 @@ function ConversionForm() {
                     variant="outlined"
                     type="text"
                     label="Roman Numeral"
-                    placeholder='Enter Roman Numeral'
+                    placeholder="Enter Roman Numeral"
                     value={romanNumeral}
                     onChange={(e) => setRomanNumerals(e.target.value)}
                 />
@@ -46,9 +47,9 @@ function ConversionForm() {
                     variant="outlined"
                     type="text"
                     label="Arabic Number"
-                    placeholder='Arabic Number'
+                    placeholder="Arabic Number"
                     disabled={true}
-                    value={toInteger(romanNumeral)}
+                    value={toArabic(romanNumeral)}
                 />
             </div>
 

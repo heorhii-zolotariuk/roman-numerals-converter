@@ -1,8 +1,6 @@
 import TextField from '@material-ui/core/TextField';
 
-
-function ChallengeStep({ stepValue, setStepAnswer, stepIndex, submitted }) {
-
+function ChallengeStep({ stepValue, setStepAnswer, submitted }) {
     return (
         <div className="challenge-step">
             <TextField
@@ -17,8 +15,8 @@ function ChallengeStep({ stepValue, setStepAnswer, stepIndex, submitted }) {
                 error={submitted && !stepValue.correct}
                 variant="outlined"
                 type="text"
-                placeholder='Enter Roman Numeral'
-                onChange={!submitted ? (e) => setStepAnswer(stepIndex, e.target.value) : null}
+                placeholder="Enter Roman Numeral"
+                onChange={!submitted ? (e) => setStepAnswer(e.target.value) : null}
                 value={stepValue.answer}
             />
         </div>
