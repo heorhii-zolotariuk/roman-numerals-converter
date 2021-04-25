@@ -1,0 +1,41 @@
+.challenge-container {
+    min-width: 400px;
+}
+
+.challenge-container__header {
+    margin-bottom: 20px;
+}
+
+.challenge-settings {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.challenge-step {
+    display: flex;
+    justify-content: space-between;
+}
+
+.challenge-step__input.MuiFormControl-root {
+    margin-bottom: 10px;
+}
+.challenge-step__input:nth-child(2n + 1) {
+    margin-right: 10px;
+}
+
+.challenge-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+
+.red-border .MuiOutlinedInput-root {
+    border-color: red !important;
+}
+
+.green-border .MuiOutlinedInput-root {
+    border-color: green !important;
+}

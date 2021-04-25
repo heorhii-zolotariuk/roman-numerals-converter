@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap');
 @import './css/converstion-form.css';
+@import './css/challenge.css';
 
 * {
   box-sizing: border-box;
@@ -12,10 +13,18 @@ body {
 }
 
 .application-container {
-  margin: 30px 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 30px auto;
+  max-width: 410px;
 }
 
 .application-container__item {
   display: flex;
   justify-content: center;
+}
+
+.red {
+  border-color: red;
 }

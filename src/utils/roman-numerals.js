@@ -11,6 +11,10 @@ const lookup = new Map([
 const toRoman = (integer) => {
     let romanNumerical = '';
 
+    if (!integer) {
+        return romanNumerical;
+    }
+
     lookup.forEach(function(value, key) {
         while ( integer >= value ) {
             romanNumerical += key;
@@ -24,6 +28,10 @@ const toRoman = (integer) => {
 const toInteger = (romanNumeral) => {
     let integer = 0;
 
+    if (!romanNumeral) {
+        return '';
+    }
+
     if(romanNumeral){
         const charsArray = romanNumeral.toUpperCase().split('');
 
@@ -32,7 +40,7 @@ const toInteger = (romanNumeral) => {
         });
     }
 
-    return integer || '';
+    return integer;
 }
 
 export {
